@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:hologram.page)",
+      "Bash(mix deps.get:*)",
+      "Bash(mix ecto.create:*)",
+      "Bash(mix phx.gen:*)",
+      "Bash(mix ecto.migrate:*)",
+      "Bash(mix ecto.rollback:*)",
+      "Bash(ls:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(mix run:*)",
+      "Bash(rm:*)",
+      "Bash(mix phx.server:*)"
+    ],
+    "deny": []
+  }
+}
