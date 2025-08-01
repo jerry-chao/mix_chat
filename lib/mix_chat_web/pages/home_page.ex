@@ -17,8 +17,14 @@ defmodule MixChatWeb.HomePage do
           <p class="text-gray-600 mb-8">{@message}</p>
           
           <div class="space-y-4">
-            <a href="/simple" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600">
-              Test Simple Page
+            <a href="/login" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600">
+              Login
+            </a>
+            <a href="/register" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white">
+              Sign Up
+            </a>
+            <a href="/chat" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600">
+              Enter Chat (Demo)
             </a>
           </div>
         </div>

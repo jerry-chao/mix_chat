@@ -12,7 +12,8 @@
       "Bash(mkdir:*)",
       "Bash(mix run:*)",
       "Bash(rm:*)",
-      "Bash(mix phx.server:*)"
+      "Bash(mix phx.server:*)",
+      "Bash(mix compile)"
     ],
     "deny": []
   }
