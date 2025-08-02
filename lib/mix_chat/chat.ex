@@ -49,21 +49,21 @@ defmodule MixChat.Chat do
   def create_direct_conversation(user1_id, user2_id) do
     # Check if conversation already exists
     existing = get_direct_conversation(user1_id, user2_id)
-    
+
     if existing do
       {:ok, existing}
     else
       user1 = Repo.get!(User, user1_id)
       user2 = Repo.get!(User, user2_id)
-      
+
       conversation_name = "#{user1.username}, #{user2.username}"
-      
+
       Repo.transaction(fn ->
         {:ok, conversation} = create_conversation(%{name: conversation_name, is_group: false})
-        
+
         add_participant(conversation.id, user1_id)
         add_participant(conversation.id, user2_id)
-        
+
         conversation
       end)
     end
@@ -94,7 +94,7 @@ defmodule MixChat.Chat do
     |> ConversationParticipant.changeset(%{
       conversation_id: conversation_id,
       user_id: user_id,
-      joined_at: DateTime.utc_now()
+      joined_at: DateTime.truncate(DateTime.utc_now(), :second)
     })
     |> Repo.insert()
   end
@@ -121,17 +121,19 @@ defmodule MixChat.Chat do
   Creates a message.
   """
   def create_message(attrs \\ %{}) do
-    changeset = %Message{}
-    |> Message.changeset(attrs)
-    
+    changeset =
+      %Message{}
+      |> Message.changeset(attrs)
+
     case Repo.insert(changeset) do
       {:ok, message} ->
         # Update conversation timestamp
         Repo.get!(Conversation, message.conversation_id)
-        |> Ecto.Changeset.change(updated_at: DateTime.utc_now())
+        |> Ecto.Changeset.change(updated_at: DateTime.truncate(DateTime.utc_now(), :second))
         |> Repo.update()
-        
+
         {:ok, Repo.preload(message, :user)}
+
       error ->
         error
     end
