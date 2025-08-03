@@ -44,7 +44,7 @@
               <div class="bg-gray-200 text-gray-900 rounded-lg px-4 py-2">
                 <p class="text-sm">{message.content}</p>
               </div>
-              <p class="text-xs text-gray-500 mt-1">{message.user.username}</p>
+              <p class="text-xs text-gray-500 mt-1">{message.user.username} • just now</p>
             </div>
           </div>
         {/if}
@@ -52,17 +52,23 @@
     </div>
 
     <div class="p-4 border-t border-gray-200 bg-white">
-      <div class="flex space-x-4">
+      <form $submit="send_message" class="flex space-x-4">
         <input
           type="text"
           placeholder="Type a message..."
-          class="flex-1 border border-gray-300 rounded-lg px-4 py-2"
+          class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           value={@new_message}
+          $change="update_new_message"
+          autocomplete="off"
         />
-        <button class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium">
+        <button 
+          type="submit"
+          class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          disabled={String.trim(@new_message) == ""}
+        >
           Send
         </button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
